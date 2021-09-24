@@ -1,0 +1,62 @@
+# Tomcat
+server:
+  port: 9090
+
+#spring
+spring:
+  application:
+    #应用名称
+    name: gateway-demo
+  profiles:
+    # 环境配置
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        #服务注册地址
+        server-addr: 127.0.0.1:8848
+        namespace: 5724fd71-674a-42dd-b28a-ba941cfaf405
+        group: DEFAULT_GROUP
+      config:
+        #配置中心地址
+        server-addr: 127.0.0.1:8848
+        namespace: 5724fd71-674a-42dd-b28a-ba941cfaf405
+#        data-id: gateway-demo-dev.yml
+        group: DEFAULT_GROUP
+        #配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+#    sentinel:
+#      # 取消控制台懒加载
+#      eager: true
+#      transport:
+#        # 控制台地址
+#        dashboard: 127.0.0.1:8718
+#      # nacos配置持久化
+#      datasource:
+#        ds1:
+#          nacos:
+#            server-addr: 127.0.0.1:8848
+#            dataId: sentinel-gateway-demo
+#            namespace: 5724fd71-674a-42dd-b28a-ba941cfaf405
+#            groupId: DEFAULT_GROUP
+#            data-type: json
+#            rule-type: flow
+#    gateway:
+#      discovery:
+#        locator:
+#          lowerCaseServiceId: true
+#          enabled: true
+#      routes:
+#        # 认证中心
+#        - id: auth-demo
+#          uri: http://www.baidu.com
+#          predicates:
+#            - Path=/auth-demo
+#          filters:
+#            - StripPrefix=1
+

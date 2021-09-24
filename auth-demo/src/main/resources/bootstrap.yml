@@ -1,0 +1,25 @@
+# tomcat
+server:
+  port: 9091
+
+spring:
+  application:
+    name: auth-demo
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 5724fd71-674a-42dd-b28a-ba941cfaf405
+      config:
+        # 配置中心地址
+        server-addr: 127.0.0.1:8848
+        namespace: 5724fd71-674a-42dd-b28a-ba941cfaf405
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
